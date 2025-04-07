@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Splitter</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section>
+      <img class="page-logo" src="./assets/logo.svg" />
+
+      <div class="calculator-container">
+        <form>
+          <!-- Bill field -->
+          <div>
+            <div class="label-container">
+              <label class="standard-label" for="amount">Bill</label>
+              <p class="standard-input-error amount-input-error">
+                Must be greater than zero
+              </p>
+            </div>
+            <div class="input-container">
+              <input
+                id="amount"
+                type="number"
+                class="standard-input amount-input"
+                name="amount"
+                placeholder="0"
+                min="0"
+                step="0.01"
+              />
+              <img class="input-icon-left" src="./assets/icon-dollar.svg" />
+            </div>
+          </div>
+
+          <!-- Tip field -->
+          <div>
+            <label class="standard-label" for="tip">Select Tip %</label>
+            <div class="tip-buttons-container">
+              <button class="tip-button" type="button" value="5">5%</button>
+              <button class="tip-button" type="button" value="10">10%</button>
+              <button class="tip-button" type="button" value="15">15%</button>
+              <button class="tip-button" type="button" value="25">25%</button>
+              <button class="tip-button" type="button" value="50">50%</button>
+              <input
+                id="tip"
+                type="number"
+                class="standard-input custom-tip-input"
+                placeholder="Custom"
+                name="custom-tip"
+              />
+            </div>
+          </div>
+
+          <!-- Number of people field -->
+          <div>
+            <div class="label-container">
+              <label class="standard-label" for="number-of-people"
+                >Number of People</label
+              >
+              <p class="standard-input-error number-of-people-input-error">
+                Must be greater than zero
+              </p>
+            </div>
+
+            <div class="input-container">
+              <input
+                id="number-of-people"
+                type="number"
+                class="standard-input number-of-people-input"
+                name="number-of-people"
+                placeholder="0"
+              />
+              <img class="input-icon-left" src="./assets/icon-person.svg" />
+            </div>
+          </div>
+
+          <!-- Calculate -->
+          <button type="submit" class="calculate-button">Calculate</button>
+        </form>
+        <div class="results-container">
+          <!-- First row -->
+          <div class="results-row">
+            <div>
+              <h4>Tip Amount</h4>
+              <p class="calculate-paragraph">/ person</p>
+            </div>
+            <p class="calculate-results tip-per-person">$0.00</p>
+          </div>
+
+          <!-- Second row -->
+          <div class="results-row">
+            <div>
+              <h4>Total</h4>
+              <p class="calculate-paragraph">/ person</p>
+            </div>
+            <p class="total-per-person calculate-results">$0.00</p>
+          </div>
+
+          <!-- Reset button -->
+          <button disabled class="reset-button">RESET</button>
+        </div>
+      </div>
+
+      <!-- History -->
+      <div class="history-container">
+        <p class="history-not-available">
+          There is no history data at the moment
+        </p>
+        <table class="history-table hide">
+          <thead>
+            <tr class="head-row">
+              <th>Bill</th>
+              <th>Tip</th>
+              <th>People</th>
+              <th>Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <!-- Statistics -->
+      <div class="statistics-container">
+        <div class="statistics-card">
+          <h3>Average Bill</h3>
+          <p class="average-bill statistics">$0.00</p>
+        </div>
+        <div class="statistics-card">
+          <h3>Average Tip</h3>
+          <p class="average-tip statistics">$0.00</p>
+        </div>
+        <div class="statistics-card">
+          <h3>The most expensive</h3>
+          <p class="highest-price statistics">$0.00</p>
+        </div>
+      </div>
+    </section>
+    <script src="./script.js"></script>
+  </body>
+</html>
