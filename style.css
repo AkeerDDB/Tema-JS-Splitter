@@ -9,6 +9,7 @@
   --green-900: hsl(183, 100%, 15%); /*  */
 
   --grey-50: hsl(189, 47%, 97%); /* #F3F9FA */
+  --grey-100: hsl(173, 61%, 77%);
   --grey-200: hsl(185, 41%, 84%); /*  */
   --grey-400: hsl(184, 14%, 56%); /*  */
   --grey-500: hsl(186, 14%, 43%); /*  */
@@ -40,6 +41,13 @@ section {
 }
 
 /* --- Common --- */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .standard-label {
   font-weight: 700;
   font-size: 16px;
@@ -139,7 +147,7 @@ section {
 }
 
 .tip-button:hover {
-  background-color: var(--green-400);
+  background-color: var(--grey-100);
   color: var(--grey-900);
 }
 
@@ -202,6 +210,11 @@ section {
   font-weight: 700;
 }
 
+.calculate-button:hover {
+  background-color: var(--grey-100);
+  color: var(--grey-900);
+}
+
 .reset-button:disabled {
   background-color: hsl(183, 79%, 24%);
 }
@@ -253,6 +266,7 @@ section {
 
 .statistics-container {
   margin-top: 48px;
+  margin-bottom: 48px;
   background-color: var(--white);
   padding: 32px;
   border-radius: 25px;

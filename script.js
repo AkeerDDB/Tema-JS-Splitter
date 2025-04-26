@@ -35,15 +35,17 @@ const getFormattedDate = () => {
   return formattedDate;
 };
 
-const createHistoryRow = (amount, people, index) => {
+const createHistoryRow = (amount, people, historyItemId) => {
   const newHistoryElement = document.createElement('tr');
+  newHistoryElement.setAttribute('data-id', historyItemId);
+
   newHistoryElement.innerHTML = `
   <td>${amount}</td>
   <td>${selectedTip}</td>
   <td>${people}</td>
   <td>${getFormattedDate()}</td>
   <td>
-    <button class="delete-button">
+    <button class="delete-button" data-id="${historyItemId}">
       <img src="./Assets/icon-delete.svg" />
     </button>
   </td>
@@ -58,8 +60,14 @@ const createHistoryRow = (amount, people, index) => {
     const userConfirmed = confirm('Are you sure? This action is irreversible.');
 
     if (userConfirmed === true) {
-      history.splice(index, 1);
+      history = history.filter((item) => item.id !== historyItemId);
       historyTableBody.removeChild(newHistoryElement);
+
+      // const tableRow = deleteButton.parentElement.parentElement;
+      // const tableRowId = Number(tableRow.getAttribute('data-id'));
+
+      // history = history.filter((element) => element.id !== tableRowId);
+
       updateAverageBill();
       updateAverageTip();
       highestPrice();
@@ -69,7 +77,12 @@ const createHistoryRow = (amount, people, index) => {
   deleteButton.addEventListener('click', handleDeleteHistoryRow);
 };
 
+// -- Statistics --
 const updateAverageBill = () => {
+  if (history.length === 0) {
+    averageBillElement.innerText = '$0.00';
+    return;
+  }
   let sum = 0;
   for (let i = 0; i < history.length; i++) {
     sum += history[i].bill;
@@ -81,6 +94,10 @@ const updateAverageBill = () => {
 };
 
 const updateAverageTip = () => {
+  if (history.length === 0) {
+    averageTipElement.innerText = '$0.00';
+    return;
+  }
   let totalTip = 0;
   for (let i = 0; i < history.length; i++) {
     const bill = history[i].bill;
@@ -95,6 +112,10 @@ const updateAverageTip = () => {
 };
 
 const highestPrice = () => {
+  if (history.length === 0) {
+    highestPriceElement.innerText = '$0.00';
+    return;
+  }
   let price = 0;
   for (let i = 0; i < history.length; i++) {
     if (history[i].bill > price) {
@@ -102,9 +123,10 @@ const highestPrice = () => {
     }
   }
 
-  highestPriceElement.innerText = '$' + price;
+  highestPriceElement.innerText = '$' + price.toFixed(2);
 };
 
+// -- Form --
 const handleFormSubmit = (e) => {
   e.preventDefault();
 
@@ -152,16 +174,16 @@ const handleFormSubmit = (e) => {
   historyNotAvailabel.classList.add('hide');
   historyTable.classList.remove('hide');
 
-  // createHistoryRow(amount, people);
+  const historyItemId = Date.now();
 
   history.push({
+    id: historyItemId,
     bill: amount,
-    tip: selectedTip,
+    tip: Number(selectedTip),
     numberOfPeople: people,
   });
-  const index = history.length - 1;
 
-  createHistoryRow(amount, people, index);
+  createHistoryRow(amount, people, historyItemId);
 
   updateAverageBill();
 
